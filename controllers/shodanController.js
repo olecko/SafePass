@@ -1,3 +1,4 @@
+// ShodanAPIController.js:
 const axios = require('axios');
 const dotenv = require('dotenv');
 
@@ -10,7 +11,7 @@ const getShodanData = async (req, res) => {
   }
 
   try {
-    const response = await axios.get(`https://api.shodan.io/shodan/host/${encodeURIComponent(ipAddress)}`, {
+    const response = await axios.get(`https://api.shodan.io/shodan/host/{ip}?${encodeURIComponent(ipAddress)}`, {
       headers: {
         'x-apikey': process.env.SHODAN_API_KEY,
       },

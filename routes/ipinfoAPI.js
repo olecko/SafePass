@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 
-const { getIPInfo } = require('../controllers/ipinfoController');
+const ipinfoController = require('../controllers/ipinfoController.js');
 
-router.post('/ipinfo', getIPInfo);
-
-module.exports = router;
+module.exports = (app) => {
+  app.get('/api/ipinfo/getIPInfo', ipinfoController.getIPInfo);
+};
+;
 

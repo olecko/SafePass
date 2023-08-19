@@ -2,9 +2,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { searchDomain } = require('../controllers/dnsDumpsterController');
+const dnsDumpsterController = require('../controllers/dnsDumpsterController');
 
-router.post('/dnsdumpster', searchDomain);
-
-module.exports = router;
+module.exports = (app) => {
+  app.get('/api/dnsdumpster/searchDomain', dnsDumpsterController.searchDomain);
+};
 

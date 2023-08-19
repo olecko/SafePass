@@ -1,29 +1,29 @@
-const IPinfoWrapper = require("node-ipinfo").IPinfoWrapper;
+const express = require('express');
 const dotenv = require('dotenv');
 
-dotenv.config(); // Load environment variables from .env file
+dotenv.config();
 
-// Create an instance of IPinfoWrapper with your IPinfo API token
-const ipinfo = new IPinfoWrapper(process.env.IPINFO_API_TOKEN);
+const apiKey = process.env.IPINFO_API_KEY;
 
-// Controller function to get IP information
-const getIPInfo = async (req, res) => {
-    const ipAddress = req.params.ipAddress;
-    if (!ipAddress) {
-        return res.status(400).json({ error: 'IP address parameter is missing' });
+module.exports = (req, res) => {
+  const ipAddress = req.query.ipAddress;
+
+  // Get the IP information from the IPinfo API
+  const url = `https://api.ipinfo.io/v1/${ipAddress}?key=${apiKey}`;
+  const request = new Request(url);
+  request.get();
+
+  request.on('response', (response) => {
+    if (response.statusCode === 200) {
+      const ipInfo = JSON.parse(response.text);
+      res.json(ipInfo);
+    } else {
+      res.status(response.statusCode).send('Error getting IP information');
     }
+  });
 
-    try {
-        // Lookup the IP information asynchronously
-   	const ipinfo = await ipinfo.lookupIp(ipAddress);
-
-    	// Process the results and send them back
-    	res.json(ipinfo);
-    	} catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data from IPinfo API' });
-    }
+  request.on('error', (err) => {
+    res.status(500).send('Error getting IP information');
+  });
 };
-
-module.exports = {
-    getIPInfo,
-};
+;

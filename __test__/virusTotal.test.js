@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('virusTotalController', function() {
+describe('virusTotal API', function() {
   it('should return scan results for a valid URL', function(done) {
     this.timeout(100000); // Set the timeout to 100 seconds
 

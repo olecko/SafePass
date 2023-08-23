@@ -1,34 +1,17 @@
-// routes/censysAPI.js
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-require('dotenv').config(); // Load environment variables from .env file
+const censysController = require('../controllers/censysController');
+const userMiddleware = require('../middleware/userMiddleware');
+require('dotenv').config();
 
-router.get('/search', async (req, res) => {
+router.get('/search', userMiddleware.getUserById, async (req, res) => {
   try {
-    const censysId = process.env.CENSYS_API_ID;
-    const censysSecret = process.env.CENSYS_API_SECRET;
-    const url = req.query.url;
+    const query = req.query.query;
 
-    // Generate the authorization token
-    const auth = Buffer.from(`${censysId}:${censysSecret}`).toString('base64');
-    const headers = {
-      'Authorization': `Basic ${auth}`,
-    };
+    // Call the search function from the controller
+    const searchData = await censysController.search(query);
 
-    // Make a GET request to Censys API
-    const response = await axios.get(`https://search.censys.io/api/v1/data`, {
-      params: {
-        q: url,
-      },
-      headers: headers,
-    });
-
-    const data = response.data;
-
-    // Process and use the retrieved data as needed
-
-    res.status(200).json(data);
+    res.status(200).json(searchData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred' });
@@ -36,4 +19,3 @@ router.get('/search', async (req, res) => {
 });
 
 module.exports = router;
-

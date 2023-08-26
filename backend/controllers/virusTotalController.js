@@ -30,4 +30,3 @@ const scanURL = async (req, res) => {
 module.exports = {
   scanURL,
 };
-

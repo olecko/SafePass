@@ -1,19 +1,34 @@
 const axios = require('axios');
 const dotenv = require('dotenv');
-
 dotenv.config(); // Load environment variables
 
-const search = async (req, res) => {
-  const results = await censys.search({ query: req.query.query });
+const search = async (query) => {
+  try {
+    const censysId = process.env.CENSYS_API_ID;
+    const censysSecret = process.env.CENSYS_API_SECRET;
 
-  if (!results) {
-    return res.status(404).json({ error: 'No results found' });
-  }
-    try {
-    const results = await censys.search({ query: req.query.query });
-    res.json(results);
+    // Generate the authorization token
+    const auth = Buffer.from(`${censysId}:${censysSecret}`).toString('base64');
+    const headers = {
+      'Authorization': `Basic ${auth}`,
+    };
+
+    // Make a GET request to Censys API
+    const response = await axios.get(`https://search.censys.io/api/v1/data`, {
+      params: {
+        q: query,
+      },
+      headers: headers,
+    });
+
+    const data = response.data;
+
+    // Process and use the retrieved data as needed
+
+    return data;
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    throw new Error('An error occurred while fetching data from Censys API');
   }
 };
 

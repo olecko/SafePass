@@ -19,6 +19,19 @@ app.use(express.json());
 app.use('/api/virusTotal', virusTotalAPI);
 app.use('/api/censys', censys);
 
+// Integrating DataBase
+const db = require('./db.js');
+const User = require('./models/user.model.js');
+
+// Sync all models with the database
+db.sync()
+  .then(() => {
+    console.log('Database synced successfully');
+  })
+  .catch((err) => {
+    console.error('Database sync failed:', err);
+  });
+
 const port = process.env.PORT || 5005;
 const server = app.listen(port, () => {
   console.log(`SafePass Backend Server running on port ${port}`);

@@ -28,4 +28,3 @@ describe('virusTotal API', function() {
       });
   });
 });
-

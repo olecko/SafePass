@@ -8,4 +8,3 @@ const virusTotalController = require('../controllers/virusTotalController');
 router.get('/scan', virusTotalController.scanURL);
 
 module.exports = router;
-

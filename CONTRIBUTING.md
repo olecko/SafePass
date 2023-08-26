@@ -37,7 +37,7 @@ Please follow these coding guidelines to maintain a consistent codebase:
 If you encounter any bugs or issues, please open an issue on GitHub with a clear and detailed description of the problem. Include steps to reproduce the issue if possible.
 
 ## Code of Conduct
-By participating in this project, you agree to abide by the ([Code of Conduct]()).
+By participating in this project, you agree to abide by the ([Code of Conduct](https://github.com/olecko/SafePass/blob/main/CODE_OF_CONDUCT.md)).
 
 We appreciate your contributions and look forward to collaborating with you!
 

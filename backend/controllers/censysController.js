@@ -35,4 +35,3 @@ const search = async (query) => {
 module.exports = {
   search,
 };
-

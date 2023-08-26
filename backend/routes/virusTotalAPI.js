@@ -7,4 +7,4 @@ const virusTotalController = require('../controllers/virusTotalController');
 // Define the route for scanning URLs
 router.get('/scan', virusTotalController.scanURL);
 
-module.exports = router;;
+module.exports = router;

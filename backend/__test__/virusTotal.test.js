@@ -27,4 +27,4 @@ describe('virusTotal API', function() {
         done();
       });
   });
-});;
+});

@@ -4,11 +4,11 @@ import Header from './Header';
 
 const HomeScreen = ({ navigation }) => {
   const handleNavigateToSearch = () => {
-    navigation.navigate('Search'); // Navigate to the SearchScreen
+    navigation.navigate('SafePass Search'); // Navigate to the SearchScreen
   };
 
   const handleNavigateToProfile = () => {
-    navigation.navigate('Profile'); // Navigate to the UserProfileScreen
+    navigation.navigate('UserProfile'); // Navigate to the UserProfileScreen
   };
 
   const handleLogout = () => {
@@ -23,7 +23,7 @@ const HomeScreen = ({ navigation }) => {
       <Button title="Search" onPress={handleNavigateToSearch} />
       <Button title="User Profile" onPress={handleNavigateToProfile} />
       <Button title="Logout" onPress={handleLogout} />
-      <Header title="SafePass Home" />
+      <Header title="SafePass Guarantees Your Online Safety" />
       {/* Add more components and functionality as needed */}
     </View>
   );

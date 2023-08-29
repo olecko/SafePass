@@ -17,7 +17,7 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="SafePass Search" component={SearchScreen} />
         <Stack.Screen name="UserProfile" component={UserProfileScreen} />
       </Stack.Navigator>
       <StatusBar style="auto" />

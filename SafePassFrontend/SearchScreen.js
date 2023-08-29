@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { getCensysData, scanURL } from './Constants';
 
 const SearchScreen = () => {
@@ -31,11 +31,29 @@ const SearchScreen = () => {
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
-      <Button title="Search Censys" onPress={handleCensysSearch} />
-      <Button title="Scan with VirusTotal" onPress={handleVirusTotalScan} />
+      <Button title="Search With Censys" onPress={handleCensysSearch} />
+      <Button title="Scan With VirusTotal" onPress={handleVirusTotalScan} />
       <Text>{searchResult}</Text>
+      <Text style={styles.footer}>SafePass: <Text style={styles.italic}>Your Shield in a Digital Realm</Text></Text>
     </View>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'red', // Set your desired background color
+    padding: 20,
+  },
+  footer: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+  },
+  italic: {
+    fontStyle: 'italic',
+  },
+});
 
 export default SearchScreen;

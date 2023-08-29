@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express(); // Create the Express application
+const api = express();
 
 
 const virusTotalAPI = require('./routes/virusTotalAPI');

@@ -1,27 +1,37 @@
 // middleware/authMiddleware.js
-const jwt = require('jsonwebtoken'); // Import the jsonwebtoken library
-require('dotenv').config(); // Load environment variables
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 function authMiddleware(req, res, next) {
-  const userId = getTokenFromHeaders(req.headers.authorization);
+  let userId = null;
+  userId = getTokenFromHeaders(req.headers.authorization);
+  req.userId = userId || null;
 
-  // Store the user ID in the request object for later use in route handlers
-  req.userId = userId;
+  const secretKey = process.env.JWT_SECRET_KEY;
+  if (!secretKey) {
+    throw new Error('JWT_SECRET_KEY environment variable is not defined');
+  }
 
-  next(); // Pass control to the next middleware or route handler
+  try {
+    const token = getTokenFromHeaders(req.headers.authorization); // Get token from headers
+    if (!token) {
+      throw new Error('Token is missing');
+    }
+
+    const decoded = jwt.verify(token, secretKey);
+    req.userId = decoded.userId; // Set userId in the request object
+    next(); // Call the next middleware
+  } catch (error) {
+    // Handle invalid token gracefully
+    req.userId = null; // Set userId to null
+    next(); // Call the next middleware
+  }
 }
 
 function getTokenFromHeaders(authorizationHeader) {
   if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
     const token = authorizationHeader.substring(7);
-    try {
-      // Verify the token using the JWT secret key from .env
-      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-      return decoded.userId;
-    } catch (error) {
-      // Return null if token is invalid
-      return null;
-    }
+    return token;
   }
   return null;
 }

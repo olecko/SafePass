@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export const Constants = {
-  CENSYS_API_URL: 'http://localhost:5005/api/censys/search',
-  VIRUS_TOTAL_API_URL: 'http://localhost:5005/api/virusTotal/scan',
-  BACKEND_SERVER_URL: 'http://localhost:5005',
+  CENSYS_API_URL: 'http://127.0.0.1:5005/api/censys/search',
+  VIRUS_TOTAL_API_URL: 'http://127.0.0.1:5005/api/virusTotal/scan',
+  BACKEND_SERVER_URL: 'http://127.0.0.1:5005',
 };
 
 // This is the environment variable that contains the JWT secret key  

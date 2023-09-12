@@ -2,6 +2,10 @@
 
 # dependencies
 node_modules/
+components/
+screens/
+services/
+src/
 
 # Expo
 .expo/
@@ -23,6 +27,10 @@ web-build/
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+*.lock
+babel.config.js
+package.json
+package-lock.json
 
 # macOS
 .DS_Store

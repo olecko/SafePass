@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import Header from './Header';
+import Footer from './Footer';
+import AboutUs from './AboutUs';
 
 const HomeScreen = ({ navigation }) => {
   const handleNavigateToSearch = () => {
@@ -17,14 +19,23 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate('Login'); // Navigate to the LoginScreen
   };
 
+  const handleNavigateToAboutUs = () => {
+    navigation.navigate('About Us'); // Navigate to the AboutUs screen
+  };
+
   return (
-    <View>
-      <Text>Welcome! SafePass: Your shield in a digital realm!</Text>
-      <Button title="Search" onPress={handleNavigateToSearch} />
-      <Button title="User Profile" onPress={handleNavigateToProfile} />
-      <Button title="Logout" onPress={handleLogout} />
-      <Header title="SafePass Guarantees Your Online Safety" />
-      {/* Add more components and functionality as needed */}
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <Text>Welcome! SafePass: Your shield in a digital realm!</Text>
+        <Button title="Search" onPress={handleNavigateToSearch} />
+        <Button title="User Profile" onPress={handleNavigateToProfile} />
+        <Button title="Logout" onPress={handleLogout} />
+      </View>
+      <View style={styles.footer}>
+        <Button title="About Us" onPress={handleNavigateToAboutUs} />
+	<Footer title="SafePass Guarantees Your Online Safety" />
+        {/* Add more footer elements if needed */}
+      </View>
     </View>
   );
 };
@@ -33,6 +44,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    justifyContent: 'space-between', // Arrange content vertically with space between
+  },
+  content: {
+    flex: 1, // Take up available space in the container
+    justifyContent: 'flex-start', // Align content at the top
+  },
+  footer: {
+    justifyContent: 'flex-end', // Align content at the bottom
   },
 });
 

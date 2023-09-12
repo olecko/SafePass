@@ -32,7 +32,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      const user = await authService.login(username, password);
+      const user = await authService.loginUser(username, password);
       console.log('Logged in user:', user);
       // Redirect to HomeScreen or perform other actions upon successful login
       navigation.navigate('Home');
